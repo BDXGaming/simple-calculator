@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <script src="{{url_for('static', filename='js/calculator.js')}}"></script>
+{% endblock %}
+
+{% block title %}Calculator{% endblock %}
+
+{% block content %}
+    <h1>This is a calculator.</h1>
+    <div class="container">
+        <div class="calc-output"><p id="output"></p></div>
+        <table>
+            <tbody>
+                <tr><td><div class="calc-bttn top" id="clear">C</div></td><td><div class="calc-bttn top" id="sign">+/-</div></td><td><div class="calc-bttn top" id="percent">%</div></td><td><div class="calc-bttn border" id="divide">/</div></td></tr>
+                <tr><td><div class="calc-bttn" id="7">7</div></td><td><div class="calc-bttn" id="8">8</div></td><td><div class="calc-bttn" id="9">9</div></td><td><div class="calc-bttn border" id="plus">+</div></td></tr>
+                <tr><td><div class="calc-bttn" id="4">4</div></td><td><div class="calc-bttn" id="5">5</div></td><td><div class="calc-bttn" id="6">6</div></td><td><div class="calc-bttn border" id="minus">-</div></td></tr>
+                <tr><td><div class="calc-bttn" id="1">1</div></td><td><div class="calc-bttn" id="2">2</div></td><td><div class="calc-bttn" id="3">3</div></td><td><div class="calc-bttn border" id="multiply">*</div></td></tr>
+                <tr><td><div class="calc-bttn" id="0">0</div></td><td><div class="calc-bttn" id="none"> </div></td><td><div class="calc-bttn" id="decimal">.</div></td><td><div class="calc-bttn border" id="equals">=</div></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
