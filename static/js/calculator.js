@@ -1,13 +1,56 @@
-$(document).ready(function (){
-    const numbers = [0,1,2,3,4,5,6,7,8,9]
-    const operations = ["plus", "minus", "divide", "multiply", "clear"]
-    const operationToSign = {"plus":"+", "minus":"-", "divide":"/", "multiply":"*"}
-    let numberString = ""
-    let operation = ""
-    let displayId = "output";
-    let currentNumber = 0;
-    let lastNumber = 0;
+// Declare the variables used in the program
+const numbers = [0,1,2,3,4,5,6,7,8,9]
+const operations = ["plus", "minus", "divide", "multiply", "clear"]
+const operationToSign = {"plus":"+", "minus":"-", "divide":"/", "multiply":"*"}
+let numberString = ""
+let operation = ""
+let displayId = "output";
+let currentNumber = 0;
+let lastNumber = 0;
 
+/**
+ * This function performs the math operation on the two numbers and displays the result
+ */
+function doMath(){
+     let secondVal = parseFloat(numberString)
+
+    if(operation === "+"){
+        lastNumber = currentNumber + secondVal
+    } else if(operation === "-"){
+        lastNumber = currentNumber - secondVal
+    } else if(operation === "*"){
+        lastNumber = currentNumber * secondVal
+    } else if(operation === "/"){
+        lastNumber = currentNumber / secondVal // This does not work for some reason
+    }
+    numberString = lastNumber.toFixed(2).toString()
+    $(`#${displayId}`).text(lastNumber)
+}
+
+$(document).ready(function (){
+
+    // This is called whenever a key is pressed
+    $(document).keydown(function (e){
+
+        // Gets the keycode of the key that was pressed
+        let key = e.keyCode
+        key = String.fromCharCode(key)
+
+        // Converts the key to a float if possible for checking if it is a number
+        let numKey = parseFloat(key)
+
+        // Handles the keyboard input functionality of the calculator
+        if(numbers.includes(numKey)){
+            numberString += key.toString()
+            $(`#${displayId}`).text(numberString)
+        } else if(e.keyCode === 190){
+            numberString += "."
+            $(`#${displayId}`).text(numberString)
+        }else if (e.keyCode === 13){
+            doMath()
+        }
+
+    })
     $("div").click(function (){
         let id = $(this).attr("id")
         id = parseFloat(id)
@@ -48,19 +91,7 @@ $(document).ready(function (){
 
             $(`#${displayId}`).text(numberString)
         } else if($(this).attr("id") === "equals"){
-            let secondVal = parseFloat(numberString)
-
-            if(operation === "+"){
-                lastNumber = currentNumber + secondVal
-            } else if(operation === "-"){
-                lastNumber = currentNumber - secondVal
-            } else if(operation === "*"){
-                lastNumber = currentNumber * secondVal
-            } else if(operation === "/"){
-                lastNumber = currentNumber / secondVal // This does not work for some reason
-            }
-            numberString = lastNumber.toString()
-            $(`#${displayId}`).text(lastNumber)
+            doMath()
         }
     })
 

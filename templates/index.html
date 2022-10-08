@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
     <script src="{{url_for('static', filename='js/calculator.js')}}"></script>
 {% endblock %}
 
