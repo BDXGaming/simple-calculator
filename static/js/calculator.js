@@ -27,6 +27,13 @@ function doMath(){
     $(`#${displayId}`).text(lastNumber)
 }
 
+function setOperation(operationGiven){
+    currentNumber = parseFloat(numberString)
+    numberString = ""
+    operation = operationGiven
+    $(`#${displayId}`).text(operation)
+}
+
 $(document).ready(function (){
 
     // This is called whenever a key is pressed
@@ -38,9 +45,19 @@ $(document).ready(function (){
 
         // Converts the key to a float if possible for checking if it is a number
         let numKey = parseFloat(key)
-
+        console.log(e.keyCode)
         // Handles the keyboard input functionality of the calculator
-        if(numbers.includes(numKey)){
+        if(e.shiftKey){
+            if(e.keyCode === 56) {
+                setOperation("*")
+            }else if(e.keyCode === 187){
+                setOperation("+")
+            }
+        } else if(e.keyCode === 189){
+            setOperation("-")
+        } else if(e.keyCode === 191){
+            setOperation("/")
+        } else if(numbers.includes(numKey)){
             numberString += key.toString()
             $(`#${displayId}`).text(numberString)
         } else if(e.keyCode === 190){
